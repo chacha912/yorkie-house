@@ -1,7 +1,10 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "baseUrl": "src",
+    "baseUrl": ".",
+    "paths": {
+      "@yorkie-house/src/*": ["src/*"],
+    },
     "lib": [
       "dom",
       "dom.iterable",
