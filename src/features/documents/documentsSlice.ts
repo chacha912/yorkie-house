@@ -24,14 +24,15 @@ export const listDocumentsAsync = createAsyncThunk(
     isForward: boolean;
     previousID?: string;
   }): Promise<{
+    isForward: boolean;
+    previousID: string;
     documents: Array<DocumentSummary>;
-    hasNext: boolean;
-    hasPrevious: boolean;
+    pageSize: number;
   }> => {
     const { isForward, previousID = '' } = params;
     const documents = await listDocuments(previousID, pageSize + 1, isForward);
 
-    return getPaginationData({ documents, isForward, previousID, pageSize });
+    return { documents, isForward, previousID, pageSize };
   }
 );
 
@@ -64,7 +65,8 @@ export const documentSlice = createSlice({
       state.status = 'loading';
     });
     builder.addCase(listDocumentsAsync.fulfilled, (state, action) => {
-      const { documents, hasPrevious, hasNext } = action.payload;
+      const { documents, hasPrevious, hasNext } = getPaginationData(action.payload);
+
       state.status = 'idle';
       state.documents = documents;
       state.hasNext = hasNext;
