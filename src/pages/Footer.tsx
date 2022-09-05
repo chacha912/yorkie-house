@@ -15,10 +15,10 @@
  */
 
 import React from 'react';
-
+import './footer.scss';
 export function Footer() {
   return (
-    <footer className="flex justify-center items-center h-12 border-t border-solid border-gray-200">
+    <footer>
       <svg width="60" height="16" viewBox="0 0 60 16" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path
           d="M22.1172 4.21149L24.8819 9.13403V11.8145H26.2041V9.12388L28.9688 4.21149H27.5865L25.7534 7.59071L25.533 8.03746L25.3126 7.59071L23.4995 4.21149H22.1172Z"
