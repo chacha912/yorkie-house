@@ -1,0 +1,317 @@
+@charset "utf-8";
+@use "../global/mixins-lib";
+@use "../global/variables";
+@use "../global/font";
+@use "sass:list";
+@use "sass:map";
+
+* {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-focus-ring-color: rgba(0, 0, 0, 0);
+}
+
+*:not(input):not(textarea) {
+  -webkit-touch-callout: none; // disable the IOS popup when long-press on a link
+  user-select: none;
+}
+
+body, p, h1, h2, h3, h4, h5, h6, ul, ol, li, dl, dt, dd, table, th, td, form, fieldset, legend, input, textarea, button, select {
+  margin: 0;
+  padding: 0;
+}
+
+body, input, textarea, select, button, table {
+  outline: none !important;
+}
+
+html, body {
+  height: 100%;
+}
+
+html {
+  font-size: mixins-lib.$root-em * 1px;
+
+  @if(variables.$initial-line-height !='normal') {
+    line-height: mixins-lib.$root-em * 1px;
+  }
+}
+
+body {
+  -webkit-overflow-scrolling: touch;
+  user-select: none;
+  background-color: variables.$white;
+  @include mixins-lib.rfonts(variables.$initial-font-size, variables.$initial-line-height, 400);
+  font-family: variables.$font-family-common;
+  overflow: overlay;
+}
+
+html, body, code, kbd, pre, samp {
+  font-family: variables.$font-family-common;
+}
+
+article, aside, dialog, footer, header, section, nav, figure, main {
+  display: block
+}
+
+pre {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+em, address {
+  font-style: normal;
+}
+
+img, fieldset {
+  border: 0;
+}
+
+ul, ol, dl {
+  list-style: none;
+  padding-left: 0px;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+// line-height: normal로 초기화
+button,
+input,
+optgroup,
+select,
+textarea {
+  color: inherit;
+
+  @if(variables.$initial-line-height=='normal') {
+    line-height: normal;
+  }
+}
+
+button {
+  border: transparent;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.blind {
+  @extend %visuallyhidden;
+}
+
+// color
+$palette: (
+  "gray": (
+    "900": variables.$gray900,
+    "800": variables.$gray800,
+    "700": variables.$gray700,
+    "600": variables.$gray600,
+    "500": variables.$gray500,
+    "400": variables.$gray400,
+    "300": variables.$gray300,
+    "200": variables.$gray200,
+    "50": variables.$gray50,
+    "000": variables.$gray000,
+  ),
+  "orange": (
+    "dark": variables.$orange_dark,
+    "0": variables.$orange_0,
+    "light": variables.$orange_light,
+    "alpha_dark": variables.$orange_alpha_dark,
+    "alpha_0": variables.$orange_alpha_0,
+    "alpha_light": variables.$orange_alpha_light
+  ),
+  "yellow": (
+    "dark": variables.$yellow_dark,
+    "0": variables.$yellow_0,
+    "light": variables.$yellow_light,
+    "alpha_dark": variables.$yellow_alpha_dark,
+    "alpha_0": variables.$yellow_alpha_0,
+    "alpha_light": variables.$yellow_alpha_light
+  ),
+  "green": (
+    "dark": variables.$green_dark,
+    "0": variables.$green_0,
+    "light": variables.$green_light,
+    "alpha_dark": variables.$green_alpha_dark,
+    "alpha_0": variables.$green_alpha_0,
+    "alpha_light": variables.$green_alpha_light
+  ),
+  "blue": (
+    "dark": variables.$blue_dark,
+    "0": variables.$blue_0,
+    "light": variables.$blue_light,
+    "alpha_dark": variables.$blue_alpha_dark,
+    "alpha_0": variables.$blue_alpha_0,
+    "alpha_light": variables.$blue_alpha_light
+  ),
+  "red": (
+    "dark": variables.$red_dark,
+    "0": variables.$red_0,
+    "light": variables.$red_light,
+    "alpha_dark": variables.$red_alpha_dark,
+    "alpha_0": variables.$red_alpha_0,
+    "alpha_light": variables.$red_alpha_light
+  ),
+  "purple": (
+    "dark": variables.$purple_dark,
+    "0": variables.$purple_0,
+    "light": variables.$purple_light,
+    "alpha_dark": variables.$purple_alpha_dark,
+    "alpha_0": variables.$purple_alpha_0,
+    "alpha_light": variables.$purple_alpha_light
+  )
+);
+
+@function map-deep-get($map, $keys...) {
+  @each $key in $keys {
+    $map: map-get($map, $key);
+  }
+  @return $map;
+}
+
+// @debug map-deep-get($palette);
+.white {
+  color: variables.$white;
+
+  &_bg {
+    background-color: variables.$white;
+  }
+}
+
+@each $name, $value in map-deep-get($palette, "gray") {
+  .gray#{$name} {
+    color: $value;
+  }
+  .gray#{$name}_bg {
+    background-color: $value;
+  }
+}
+@each $name, $value in map-deep-get($palette, "orange") {
+  .orange_#{$name} {
+    color: $value;
+  }
+  .orange_#{$name}_bg {
+    background-color: $value;
+  }
+}
+@each $name, $value in map-deep-get($palette, "yellow") {
+  .yellow_#{$name} {
+    color: $value;
+  }
+  .yellow_#{$name}_bg {
+    background-color: $value;
+  }
+}
+@each $name, $value in map-deep-get($palette, "green") {
+  .green_#{$name} {
+    color: $value;
+  }
+  .green_#{$name}_bg {
+    background-color: $value;
+  }
+}
+@each $name, $value in map-deep-get($palette, "blue") {
+  .blue_#{$name} {
+    color: $value;
+  }
+  .blue_#{$name}_bg {
+    background-color: $value;
+  }
+}
+@each $name, $value in map-deep-get($palette, "red") {
+  .red_#{$name} {
+    color: $value;
+  }
+  .red_#{$name}_bg {
+    background-color: $value;
+  }
+}
+@each $name, $value in map-deep-get($palette, "purple") {
+  .purple_#{$name} {
+    color: $value;
+  }
+  .purple_#{$name}_bg {
+    background-color: $value;
+  }
+}
+
+// Gradient
+$gradient: (
+  "yellow": variables.$gradient_yellow,
+  "orange": variables.$gradient_orange,
+  "red": variables.$gradient_red,
+  "purple": variables.$gradient_purple,
+  "blue": variables.$gradient_blue,
+  "green": variables.$gradient_green,
+  "gray1": variables.$gradient_gray1,
+  "gray2": variables.$gradient_gray2,
+  "gray3": variables.$gradient_gray3,
+  "gray4": variables.$gradient_gray4,
+);
+
+@each $color, $value in $gradient {
+  .gradient_#{$color}_bg {
+    background-image: $value;
+  }
+}
+
+// Shadow
+$shadow: (
+  "xs": variables.$shadow_xs,
+  "s": variables.$shadow_s,
+  "m": variables.$shadow_m,
+  "l": variables.$shadow_l
+);
+
+@each $size, $value in $shadow {
+  .shadow_#{$size} {
+    box-shadow: $value;
+  }
+}
+
+// Dimmed
+.dimmed {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.25);
+}
+
+// layout
+#root {
+  height: 100%;
+}
+
+.wrap {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  flex: 1 1 auto;
+  overflow: hidden;
+  min-height: 100%;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  flex: 1 1 auto;
+  position: relative;
+}
+
+*::-webkit-scrollbar {
+  width: 3px;  /* 스크롤바의 너비 */
+}
+
+*::-webkit-scrollbar-thumb {
+  background: variables.$orange_alpha_dark; /* 스크롤바의 색상 */
+  border-radius: 2px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;  /*스크롤바 뒷 배경 색상*/
+}
